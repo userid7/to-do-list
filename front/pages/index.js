@@ -1,16 +1,17 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import Container from '@mui/material/Container'
 import { Box, Button, Checkbox, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, TextField, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import { useEffect, useState } from 'react';
-
+import client from '../libs/apollo-client';
+import { gql } from '@apollo/client';
 
 export default function Home() {
   const [data, setData] = useState([])
   const [title, setTitle] = useState()
   const [desc, setDesc] = useState()
   const [count, setCount] = useState(0)
+
   useEffect(() => {
     setData([
       {
@@ -25,7 +26,22 @@ export default function Home() {
       },
     ])
     setCount(2)
-
+    client.query({
+      query: gql`
+        query {
+          allTodo{
+            id
+            title
+            description
+            checked
+          }
+        }
+      `
+    }).then(result => {
+      console.log(result.data.allTodo)
+      setData(result.data.allTodo)
+      setCount(0)
+    })
     return () => { }
   }, [])
 
@@ -38,6 +54,22 @@ export default function Home() {
 
     setData([...data, { id: count, title: title, description: desc }])
     setCount(tempCount)
+    client.mutate({
+      mutation: gql`
+        mutation addTodoMutation($title:String!, $description: String! ){
+          addTodo(title:$title, description:$description){
+            code
+            msg
+          }
+        }
+      `,
+      variables:{
+        title:title,
+        description:desc
+      }
+    }).then(result=>{
+      console.log(result)
+    })
   }
 
   function deleteItem(id) {
@@ -71,7 +103,7 @@ export default function Home() {
                   id="todolist-id"
                   label="Description"
                   onChange={(e) => { setDesc(e.target.value) }}
-                  sx={{ mx: 2 }} 
+                  sx={{ mx: 2 }}
                 />
                 <Button sx={{ m: 2 }} onClick={handleAddToDo}>
                   + Add
