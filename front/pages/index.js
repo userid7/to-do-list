@@ -71,6 +71,7 @@ export default function Home() {
                   id="todolist-id"
                   label="Description"
                   onChange={(e) => { setDesc(e.target.value) }}
+                  sx={{ mx: 2 }} 
                 />
                 <Button sx={{ m: 2 }} onClick={handleAddToDo}>
                   + Add
