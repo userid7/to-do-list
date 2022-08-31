@@ -21,3 +21,6 @@ This is installation for each folder.
 ### Front
 1. install using `yarn`
 1. run it `npm run dev`
+
+### how to use
+To access the application use `localhost:3000` for main application and `localhost:8000/admin` to access django admin page.
