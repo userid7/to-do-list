@@ -1,17 +1,16 @@
-import Image from "next/image"
-
+import Image from "next/image";
 
 export default function Footer(props) {
-  return <footer className="footer">
-    <a
-      href="#"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Powered by <b>¯\_(ツ)_/¯</b>
-      {/* <span className="logo">
-        <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-      </span> */}
-    </a>
-  </footer>
+  return (
+    <footer className="text-center bg-white">
+      <a
+        className="text-xs text-slate-500"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Fullstack Dev 2022
+      </a>
+    </footer>
+  );
 }

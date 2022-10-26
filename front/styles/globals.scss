@@ -7,3 +7,7 @@
 @import 'partials/footer';
 
 @import 'partials/responsive/dark';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

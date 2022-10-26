@@ -1,3 +1,4 @@
+from datetime import date, datetime
 import graphene
 
 from todo.models import ToDo
@@ -17,34 +18,53 @@ class ToDoQuery(graphene.ObjectType):
         return ToDo.objects.all()
 
 
-class Query(
-        ToDoQuery,
-        graphene.ObjectType):
-    pass
-
-
 class TodoAddMutation(graphene.Mutation):
     class Arguments:
         title = graphene.String(required=True)
-        description = graphene.String()
-        checked = graphene.Boolean()
+        isComplete = graphene.Boolean()
+        datetime = graphene.DateTime()
 
     code = graphene.String()
     msg = graphene.String()
 
     @classmethod
-    def mutate(cls, root, info, title, description, checked=False):
+    def mutate(cls, root, info, title, datetime=datetime.now(), isComplete=False):
         try:
             ToDo.objects.create(
-                title=title, description=description, checked=checked)
+                title=title, datetime=datetime, isComplete=isComplete)
             return TodoAddMutation(code='success', msg='')
         except Exception as e:
             return TodoAddMutation(code='wrong_value', msg=str(e))
 
 
+class TodoUpdateMutation(graphene.Mutation):
+    class Arguments:
+        id = graphene.Int(required=True)
+        title = graphene.String(required=True)
+        isComplete = graphene.Boolean()
+        datetime = graphene.DateTime()
+
+    code = graphene.String()
+    msg = graphene.String()
+
+    @classmethod
+    def mutate(cls, root, info, id, title, isComplete, datetime=None):
+        try:
+            print("updateTodo")
+            print(id)
+            todo = ToDo.objects.get(id=id)
+            todo.title = title
+            todo.datetime = datetime
+            todo.isComplete = isComplete
+            todo.save()
+            return TodoUpdateMutation(code='success', msg='')
+        except Exception as e:
+            return TodoUpdateMutation(code='wrong_value', msg=str(e))
+
+
 class TodoDeleteMutation(graphene.Mutation):
     class Arguments:
-        id = graphene.String(required=True)
+        id = graphene.Int(required=True)
 
     code = graphene.String()
     msg = graphene.String()
@@ -61,7 +81,14 @@ class TodoDeleteMutation(graphene.Mutation):
 
 class Mutation(graphene.ObjectType):
     add_todo = TodoAddMutation.Field()
+    update_todo = TodoUpdateMutation.Field()
     delete_todo = TodoDeleteMutation.Field()
+
+
+class Query(
+        ToDoQuery,
+        graphene.ObjectType):
+    pass
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

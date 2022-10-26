@@ -5,4 +5,4 @@ from todo.models import ToDo
 
 @admin.register(ToDo)
 class TodoAdmin(admin.ModelAdmin):
-    list_display = ['title', 'checked', 'created']
+    list_display = ['title', 'datetime', 'isComplete']
