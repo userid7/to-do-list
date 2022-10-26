@@ -60,8 +60,8 @@ export default function Home() {
         <meta name="description" content="Simple to do list" />
       </Head>
 
-      <div className="flex-col h-full mx-auto py-8 px-4">
-        <div className="w-full mt-20 text-left ">
+      <div className="flex-col h-full max-w-[650px] min-w-[380px] mx-auto py-8 px-4">
+        <div className="w-full mi mt-20 text-left ">
           <div className="flex justify-between align-middle">
             <h1 className="text-5xl font-bold text-white font-sans">
               TO DO LIST

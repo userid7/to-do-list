@@ -33,7 +33,7 @@ export default function ToDoBase({
   }, [items, filter]);
 
   return (
-    <div className="max-w-xl min-w-[380px]">
+    <div className="max-w-xl">
       <NewActivity addCallback={addCallback} />
       {data.length > 0 ? (
         data.map((item, idx) => {
