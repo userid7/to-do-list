@@ -1,0 +1,47 @@
+﻿Project Name
+Simple To Do List Application
+
+
+Description
+Simple application to make a list of tasks that build using NextJS and Django with GraphQL protocol. Users can add and remove tasks from the list. Users also can mark and unmark tasks as a completed task.  The app has a feature to filter active and complete tasks. All data remain persistent in backend database.
+
+
+Goals
+* Test To Do list add and remove feature
+* Test To Do list checklist feature
+* Test To Do list filter feature
+
+
+Approach
+* Unit Test
+Testing ToDo model in Django
+* API Test
+Testing GraphQL API query
+* End to end Test (E2E Test)
+Testing feature from Next JS web client
+
+
+Tools
+* Django : default UnitTest module
+* NextJS : Cypress
+
+
+Step
+* Unit Test 
+Unit test can be done by typing this command in Python Django environment
+        python manage.py test todo
+
+
+* API Test 
+API test can be done by typing this command in Python Django environment
+        python manage.py test graph
+
+* E2E Test
+E2E test can be done by typing this command in Python Django environment
+	python manage.py testserver todo/todo-fixture.json 
+and then run this command in Next JS environment
+	npm run test
+
+
+Conclusion and Recommendation
+All tests run successfully. For the next update it seems better to use REST API for the backend in this relatively simple application as REST is much easier to implement and maintain.
