@@ -28,7 +28,7 @@ class TodoAddMutation(graphene.Mutation):
     msg = graphene.String()
 
     @classmethod
-    def mutate(cls, root, info, title, datetime=datetime.now(), isComplete=False):
+    def mutate(cls, root, info, title, datetime=None, isComplete=False):
         try:
             ToDo.objects.create(
                 title=title, datetime=datetime, isComplete=isComplete)
@@ -50,8 +50,6 @@ class TodoUpdateMutation(graphene.Mutation):
     @classmethod
     def mutate(cls, root, info, id, title, isComplete, datetime=None):
         try:
-            print("updateTodo")
-            print(id)
             todo = ToDo.objects.get(id=id)
             todo.title = title
             todo.datetime = datetime

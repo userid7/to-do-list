@@ -14,7 +14,7 @@ export default function NewActivity({ addCallback }) {
         }}
       >
         <input
-          className="w-full h-16 border-none focus:ring-0 outline-0 input "
+          className="w-full h-16 border-none focus:ring-0 outline-0 input   "
           placeholder="What we gonna do?"
           type="text"
           maxLength="24"
