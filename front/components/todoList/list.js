@@ -25,7 +25,10 @@ export default function ActivityList({
         />
       </div>
 
-      <div className="flex flex-1 w-full my-auto mx-2 align-middle border-none cursor-pointer input hover:text-blue-600">
+      <div
+        id="todo-list-title"
+        className="flex flex-1 w-full my-auto mx-2 align-middle border-none cursor-pointer input hover:text-blue-600"
+      >
         {isComplete ? <strike>{title}</strike> : title}
       </div>
 
