@@ -1,4 +1,4 @@
-describe("example to-do app", () => {
+describe("simple to-do app", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000");
   });
@@ -31,7 +31,7 @@ describe("example to-do app", () => {
     cy.contains(newItem).should("not.exist");
   });
 
-  context("with a checked task", () => {
+  context("checklist and filter", () => {
     it("can mark task as complete", () => {
       cy.contains("Zoom meet with user")
         .parent()
